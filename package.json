@@ -1,0 +1,11 @@
+{
+  "name": "harlow-mvp",
+  "version": "1.0.0",
+  "description": "Galvanize MVP express application deployed on Render",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
