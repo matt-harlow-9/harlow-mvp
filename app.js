@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/music", (req, res, next) => {
+app.get("/artists", (req, res, next) => {
     pool.query(`SELECT * FROM artists`)
         .then((data) => {
             console.log("All artists: \n", data.rows);
