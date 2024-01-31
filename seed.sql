@@ -1,7 +1,7 @@
-INSERT INTO genres (genre, tempo) VALUES ('Dubstep', '135-150bpm');
-INSERT INTO genres (genre, tempo) VALUES ('Drum & Bass', '160-180bpm');
-INSERT INTO genres (genre, tempo) VALUES ('House', '115-130bpm');
-INSERT INTO genres (genre, tempo) VALUES ('Techno', '120-140bpm');
+INSERT INTO genres (name, tempo) VALUES ('Dubstep', '135-150bpm');
+INSERT INTO genres (name, tempo) VALUES ('Drum & Bass', '160-180bpm');
+INSERT INTO genres (name, tempo) VALUES ('House', '115-130bpm');
+INSERT INTO genres (name, tempo) VALUES ('Techno', '120-140bpm');
 
 INSERT INTO artists (stage_name, real_name, age, genre_id) VALUES ('Skrillex', 'Sonny Moore', 36, 1);
 INSERT INTO artists (stage_name, real_name, age, genre_id) VALUES ('Knife Party', 'Rob Swire & Gareth McGrillen', 41, 3);

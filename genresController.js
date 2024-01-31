@@ -20,7 +20,7 @@ export default (pool) => {
         try {
             const data = await pool.query(genreQuery, [genreId]);
             console.log(data.rows);
-            if (data.rows.length == 0) {
+            if (data.rows.length === 0) {
                 res.sendStatus(404);
                 return;
             }

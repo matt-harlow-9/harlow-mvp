@@ -1,13 +1,13 @@
 import express from "express"
 import pg from "pg"
 import dotenv from "dotenv"
+import cors from "cors"
 import genresController from "./genresController.js";
-import artistsController from "./artistsController.js";
 import artistsController from "./artistsController.js";
 
 dotenv.config({path: '.env.local'});
 
-const PORT = process.env.PORT || 8003;
+const PORT = process.env.PORT || 8004;
 
 const pgConnect = `postgresql://postgres:postgres@localhost:6432/music`;
 const pgURI = process.env.REMOTE_DATABASE || pgConnect;
@@ -15,57 +15,64 @@ console.log("pgURI: ", pgURI);
 
 const pool = new pg.Pool({
     connectionString: pgURI,
+    ssl: {
+        rejectUnauthorized: false
+    }
 }); 
 
-pool.connect()
-    .then((client) => {
-        console.log(`Connected to postgres using connection string ${pgURI}`);
-        client.release();
-    })
-    .catch((err)=>{
-        console.log("Failed to connect to postgres: ", err.message);
-    })
-
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-const genresController = genresController(pool);
-const artistsController = artistsController(pool);
+pool.connect()
+    .then(() => {
+        console.log(`Connected to postgres using connection string ${pgURI}`);
+    })
+    .catch((err)=>{
+        console.log("Failed to connect to postgres: ", err.message);
+    });
+
+const genreController = genresController(pool);
+const artistController = artistsController(pool);
 
 // Get all genres
-app.get("/genres", genresController.getAllGenres);
+app.get("/genres", genreController.getAllGenres);
 
 // Get one genre
-app.get("/genres/:genreId", genresController.getGenreDetail);
+app.get("/genres/:genreId", genreController.getGenreDetail);
 
 // Create a genre
-app.post("/genres", genresController.createGenre);
+app.post("/genres", genreController.createGenre);
 
 // Update a genre by id
-app.patch("/genres/:genreId", genresController.updateGenre);
+app.patch("/genres/:genreId", genreController.updateGenre);
 
 // Delete a genre by id
-app.delete("/genres/:genreId", genresController.deleteGenre);
+app.delete("/genres/:genreId", genreController.deleteGenre);
 
 // Get all artists
-app.get("/artists", artistsController.getAllArtists)
+app.get("/artists", artistController.getAllArtists)
 
 // Get one artist
-app.get("/artists/:artistId", artistsController.getArtistDetail);
+app.get("/artists/:artistId", artistController.getArtistDetail);
 
 // Create an artist
-app.toString("/artists", artistsController.createArtist);
+app.toString("/artists", artistController.createArtist);
 
 // Update an artist by id
-app.patch("/artists/:artistId", artistsController.updateArtist);
+app.patch("/artists/:artistId", artistController.updateArtist);
 
 // Delete an artist by id
-app.delete("/artists/artistId", artistsController.deleteArtist);
+app.delete("/artists/:artistId", artistController.deleteArtist);
 
 // Get all artists for a genre id (combines data from both tables)
-app.get("/genres/:genreId/artists", genresController.getGenreArtists);
+app.get("/genres/:genreId/artists", genreController.getGenreArtists);
 
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.sendStatus(500);
+})
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
