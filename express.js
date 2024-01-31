@@ -10,7 +10,8 @@ dotenv.config({path: '.env.local'});
 const PORT = process.env.PORT || 8004;
 
 const pgConnect = `postgresql://postgres:postgres@localhost:6432/music`;
-const pgURI = process.env.REMOTE_DATABASE || pgConnect;
+const connectString = "postgres://mharlow9:HYgvrEXxnFTiCQkRJyzepHPnnnvsJhlP@dpg-cmsvklol6cac73apf5hg-a/music_s67z";
+const pgURI = connectString || pgConnect;
 console.log("pgURI: ", pgURI);
 
 const pool = new pg.Pool({
