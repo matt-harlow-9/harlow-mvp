@@ -11,7 +11,7 @@ const musicApp = {
     genreHandler: ()  => {
         runApp.emptyResults();
         let genreNum = $("#genreNum").val();
-        fetch(`http://localhost:8004/genres/${genreNum}`)
+        fetch(`https://harlow-mvp-music.onrender.com/genres/${genreNum}`)
         .then(res => res.json())
         .then(data => {
             if (data.length === 0 || !data) {
@@ -30,7 +30,7 @@ const musicApp = {
     artistHandler: () => {
         runApp.emptyResults();
         let artistNum = $("#artistNum").val();
-        fetch(`http://localhost:8004/artists/${artistNum}`)
+        fetch(`https://harlow-mvp-music.onrender.com/artists/${artistNum}`)
         .then(res => res.json())
         .then(data => {
             if (data.length === 0 || !data) {
