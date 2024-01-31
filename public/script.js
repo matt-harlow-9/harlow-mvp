@@ -55,7 +55,7 @@ const musicApp = {
                 resultCard.append(`<h4>Artist Unavailable for Selection ${artistNum}</h4>`);
             } else {
                 for (let i = 0; i < data.length; i++) {
-                    const artistResult = `
+                    let artistResult = `
                     <div class="artist-result">
                         <h3>Stage Name: ${data[i].stage_name}</h3>
                         <h3>Real Name: ${data[i].real_name}</h3>
