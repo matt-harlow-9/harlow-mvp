@@ -1,6 +1,6 @@
 CREATE TABLE genres (
     id SERIAL PRIMARY KEY,
-    genre TEXT,
+    name TEXT,
     tempo TEXT
 )
 
