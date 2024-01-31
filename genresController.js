@@ -116,7 +116,7 @@ export default (pool) => {
         const genreQuery =
             `SELECT
                 genres.name as genre_name,
-                artists.stage_name as state_name,
+                artists.stage_name as stage_name,
                 artists.id as artist_id,
                 artists.real_name as real_name,
                 artists.age as age

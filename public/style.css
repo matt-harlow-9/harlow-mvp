@@ -12,6 +12,12 @@ h1, #resultCard, .artist-result, .genre-result, label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.title, .selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .artist-result, .genre-result {
     flex-direction: column;
     background-color: rgb(148, 168, 168);
