@@ -2,18 +2,17 @@ const musicApp = {
     runApp: () => {
         const genreButton = $("#genreButton");
         const artistButton = $("#artistButton");
-        const resultCard = $("#resultCard");
         genreButton.on('click', musicApp.genreHandler);
         artistButton.on('click', musicApp.artistHandler);
     },
 
     // Event handler for genre button click
     genreHandler: ()  => {
-        runApp.emptyResults();
+        musicApp.emptyResults();
         let genreNum = $("#genreNum").val();
         fetch(`https://harlow-mvp-music.onrender.com/genres/${genreNum}`)
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
             if (data.length === 0 || !data) {
                 resultCard.append(`<h4>Genre Unavailable for Selection ${genreNum}</h4>`);
             } else {
@@ -28,7 +27,7 @@ const musicApp = {
     },
     // Event handler for artist button click
     artistHandler: () => {
-        runApp.emptyResults();
+        musicApp.emptyResults();
         let artistNum = $("#artistNum").val();
         fetch(`https://harlow-mvp-music.onrender.com/artists/${artistNum}`)
         .then(res => res.json())
@@ -48,6 +47,7 @@ const musicApp = {
         })
     },
     emptyResults: () => {
+        const resultCard = $("#resultCard");
         resultCard.empty();
     }
 }
