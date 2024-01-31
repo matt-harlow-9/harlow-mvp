@@ -8,6 +8,7 @@ const musicApp = {
 
     // Event handler for genre button click
     genreHandler: ()  => {
+        const resultCard = $("#resultCard");
         musicApp.emptyResults();
         let genreNum = $("#genreNum").val();
         fetch(`https://harlow-mvp-music.onrender.com/genres/${genreNum}`)
@@ -27,6 +28,7 @@ const musicApp = {
     },
     // Event handler for artist button click
     artistHandler: () => {
+        const resultCard = $("#resultCard");
         musicApp.emptyResults();
         let artistNum = $("#artistNum").val();
         fetch(`https://harlow-mvp-music.onrender.com/artists/${artistNum}`)
@@ -35,7 +37,7 @@ const musicApp = {
             if (data.length === 0 || !data) {
                 resultCard.append(`<h4>Artist Unavailable for Selection ${artistNum}</h4>`);
             } else {
-                let artistResult = `
+                const artistResult = `
                 <div class="artist-result">
                     <h3>Stage Name: ${data[0].stage_name}</h3>
                     <h3>Real Name: ${data[0].real_name}</h3>
